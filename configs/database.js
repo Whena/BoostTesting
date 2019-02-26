@@ -1,13 +1,23 @@
+require('dotenv').config();
 const Sequelize = require('sequelize');
 
+const {
+  DB_USER,
+  DB_PASS,
+  DB_NAME,
+  DB_HOST,
+  DB_PORT,
+  DB_DIALECT,
+} = process.env;
+
 const sequelize = new Sequelize(
-  process.env.DB_NAME,
-  process.env.DB_USERNAME,
-  process.env.DB_PASS,
+  DB_NAME,
+  DB_USER,
+  DB_PASS,
   {
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    dialect: process.env.DIALECT,
+    host: DB_HOST,
+    port: DB_PORT,
+    dialect: DB_DIALECT,
     operatorsAliases: Sequelize.Op,
     logging: false,
     pool: {
@@ -16,7 +26,6 @@ const sequelize = new Sequelize(
       acquire: 30000,
       idle: 10000,
     },
-    timezone: '+07:00',
   },
 );
 
